@@ -3,8 +3,8 @@ import pandas as pd
 import pprint
 import json
 
-my_api_key = 'AIzaSyBjvKK9stqm7DfV8r_yhD9RzKFxhv-eyFI'
-my_cse_id = '016347176537644924962:kmktmzlzila'
+my_api_key = 'your api key'
+my_cse_id = 'your cse id '
 my_search_term = 'Data Science Jobs Toronto'
 
 
