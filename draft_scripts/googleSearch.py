@@ -19,7 +19,7 @@ results = google_search(
     my_search_term, my_api_key, my_cse_id, num=10)
 
 urls = []
-# Getting only the attribute list and inserting into the attr list.
+# Getting only the attribute list and inserting into the url list.
 for i in range(0,len(results[2]['pagemap']['listitem'])):
     # print(results['features'][i]['attributes'])
     urls.append(results[2]['pagemap']['listitem'][i]['url'])
