@@ -49,11 +49,14 @@ df_tmp = df_base.merge(df_skill_aux, how='left', left_on='Job_ID', right_on='ID'
 
 df_tmp['Skill_ID'] = df_tmp['Skill_ID'].astype(int)
 
-jobs = df_tmp.merge(skill_source, left_on='Skill_ID', right_on='Skill_ID', how='left')
+df_jobs = df_tmp.merge(skill_source, left_on='Skill_ID', right_on='Skill_ID', how='left')
 
-jobs = jobs.drop_duplicates(subset={'Job_ID','Skill_ID'}, keep='first', inplace=False)
 
-print(jobs)
+# Data Cleaning
+# Removing duplicate rows ('Job_ID','Skill_ID')
+df_jobs = df_jobs.drop_duplicates(subset={'Job_ID','Skill_ID'}, keep='first', inplace=False)
+
+print(df_jobs)
 
 
 
