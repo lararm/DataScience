@@ -3,12 +3,8 @@ import numpy as np
 # from UoT_TermProject.ijobs.ds_excel import *
 
 skill_source = pd.read_excel('ds.xlsx', sheet_name='skill')
-# df_skill_source = skill_source.astype('str', copy='true')
-# df_skill_source['Skill_ID'] = df_skill_source['Skill_ID'].astype(int)
-
 
 df_kw_source = pd.read_excel('ds.xlsx', sheet_name='kw')
-# df_kw_source = kw_source.astype('str', copy='false')
 
 
 # Functions
@@ -55,7 +51,7 @@ df_tmp['Skill_ID'] = df_tmp['Skill_ID'].astype(int)
 
 jobs = df_tmp.merge(skill_source, left_on='Skill_ID', right_on='Skill_ID', how='left')
 
-print(df_tmp)
+print(jobs)
 
 
 
