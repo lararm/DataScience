@@ -1,0 +1,143 @@
+--Total Job Opportunities
+select count(distinct job_Id) from jobs
+where 
+ province <> 'Not Informed'
+
+--Jobs by province
+
+select province,  count(distinct job_Id) from jobs
+where province <> 'Not Identified'
+and province <> 'Not Informed'
+group by province
+
+-- Jobs by city
+select province,city,  count(distinct job_Id) from jobs
+where province <> 'Not Identified'
+and province <> 'Not Informed'
+group by province, city
+order by 3 desc
+
+-- Jobs by city in Ontario
+select province,city,  count(distinct job_Id) from jobs
+where province <> 'Not Identified'
+and province <> 'Not Informed'
+and province = 'ON'
+group by province, city
+order by 3 desc
+
+
+
+-- Only one Education requirements
+select skill, count(job_id) total_opportunities
+from  jobs 
+where job_id in (
+    select job_id from (
+        select  job_Id, count(job_Id)   from jobs
+        where province <> 'Not Informed'
+        and Category in ('Education')
+        group by job_id
+        having count(job_id) = 1
+        )
+)
+and Category in ('Education')
+group by skill
+order by 2
+
+
+--PhD requirement
+
+
+select province, count(distinct job_Id), skill  from jobs
+where province <> 'Not Identified'
+and Category in ('Education')
+and Skill = 'PhD'
+and province <> 'Not Informed'
+group by skill, province
+order by 2 desc
+
+-- Type of majors
+select  skill, count(distinct job_Id) from jobs
+where province <> 'Not Identified'
+and Category in ('Major')
+and province <> 'Not Informed'
+group by skill
+order by 2 desc
+
+
+-- Hard Skills
+
+select  skill, count(distinct job_Id) from jobs
+where 
+province <> 'Not Informed'
+and Category = 'Hard'
+group by skill
+order by 2 desc
+
+-- Qtd skills required by opp
+select  province, count(skill) from jobs
+where 
+province <> 'Not Informed'
+and Category = 'Hard'
+group by province, job_id
+order by 2 desc
+
+
+-- Skills in UoT DataScience certificate program
+select   job_id, inUotProgram, count(inUotProgram)
+from jobs
+group by job_id, inUotProgram
+order by job_id
+
+-- Skills in UoT DataScience certificate program
+SELECT COUNT(*) AS opportunities_without_program_skills FROM (
+select count(job_id), job_id,inUotProgram  from ( 
+    select   job_id, inUotProgram, count(inUotProgram)
+    from jobs
+    group by job_id, inUotProgram
+    order by job_id
+)
+group by job_id
+having count(job_id) = 1
+and inUotProgram = 'NO'
+)
+
+
+
+
+
+select  companyname, province, city, count(distinct job_id) as qtd_job_opportunities from jobs
+where 
+province <> 'Not Informed'
+and 
+group by companyname, city, province
+order by qtd_job_opportunities desc
+
+
+-- UoT Program skills
+select  province, count(inUotProgram) from jobs
+where 
+province <> 'Not Informed'
+and inUotProgram = 'YES'
+group by province, job_id
+
+-- Perfect employee
+
+select  skill, count(job_id) from jobs
+where Category = 'Education'
+group by skill
+order by 2
+
+select  skill, count(job_id) from jobs
+where Category = 'Major'
+group by skill
+order by 2
+
+select  skill, count(job_id) from jobs
+where Category = 'Hard'
+group by skill
+order by 2
+
+select  skill, count(job_id) from jobs
+where Category = 'Soft'
+group by skill
+order by 2
